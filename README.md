@@ -50,6 +50,17 @@
 
 ![演示图](./img/demo.png)
 
-![迷宫演示图]
 
-(https://raw.githubusercontent.com/ldcr332/-/dff3bd6ac67f5d5050870b0edbb85dcb364fd3c9/img/demo.png)
+
+
+
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/ldcr332/-/dff3bd6ac67f5d5050870b0edbb85dcb364fd3c9/img/demo.png" alt="迷宫演示图" width="600">
+</div>
+
+ <img src="https://raw.githubusercontent.com/ldcr332/-/dff3bd6ac67f5d5050870b0edbb85dcb364fd3c9/img/demo.png" alt="迷宫演示图" width="600">
+
+</div>
+
+![演示图](./img/32X32Maze.png)

@@ -50,6 +50,4 @@
 
 ![演示图](./img/demo.png)
 
-![迷宫演示图]
-
-(https://raw.githubusercontent.com/ldcr332/-/dff3bd6ac67f5d5050870b0edbb85dcb364fd3c9/img/demo.png)
+![迷宫演示图](https://raw.githubusercontent.com/ldcr332/-/dff3bd6ac67f5d5050870b0edbb85dcb364fd3c9/img/demo.png)

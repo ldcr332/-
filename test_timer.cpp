@@ -3,9 +3,9 @@
 #include <stdio.h>
 
 #define WINVER 0x0500
-#define ROW_COUNTS 8
-#define COLUMN_COUNTS 8
-#define CELL_WIDTH (int)(960/COLUMN_COUNTS)
+#define ROW_COUNTS 32
+#define COLUMN_COUNTS 32
+#define CELL_WIDTH (int)(1280/COLUMN_COUNTS)
 #define MAX_TREES 100
 #define PLAYER_RECT_WIDTH (int)(CELL_WIDTH*0.625)  // 玩家矩形的宽度
 #include <conio.h>
@@ -114,7 +114,7 @@ int addTree(Forest *f, CSTree root)
     return 1;
 }
 struct Pos g_posList[ROW_COUNTS*COLUMN_COUNTS]={0};
-int g_isAdjoinList[ROW_COUNTS*COLUMN_COUNTS][ROW_COUNTS*COLUMN_COUNTS] = {0};
+// int g_isAdjoinList[ROW_COUNTS*COLUMN_COUNTS][ROW_COUNTS*COLUMN_COUNTS] = {0};
 // int g_isAdjoinTable[ROW_COUNTS*COLUMN_COUNTS][ROW_COUNTS*COLUMN_COUNTS] = {0};
 void draw_up(int x,int y){
     line(x,y,x+CELL_WIDTH,y);
@@ -239,8 +239,8 @@ bool is_pos_has_neighbor_not_in_visited(int pos_id){
     int neighbor_pos_id[4] = {-1,-1,-1,-1};
     neighbor_pos_id[0] = (pos_y-1)*COLUMN_COUNTS+pos_x>=0&&(pos_y-1)*COLUMN_COUNTS+pos_x<ROW_COUNTS*COLUMN_COUNTS?(pos_y-1)*COLUMN_COUNTS+pos_x:-1;//up
     neighbor_pos_id[1] = (pos_y+1)*COLUMN_COUNTS+pos_x>=0&&(pos_y+1)*COLUMN_COUNTS+pos_x<ROW_COUNTS*COLUMN_COUNTS?(pos_y+1)*COLUMN_COUNTS+pos_x:-1;//down
-    neighbor_pos_id[2] = pos_y*COLUMN_COUNTS+pos_x-1>=0&&pos_y*COLUMN_COUNTS+pos_x-1<ROW_COUNTS*COLUMN_COUNTS?pos_y*COLUMN_COUNTS+pos_x-1:-1;//left
-    neighbor_pos_id[3] = pos_y*COLUMN_COUNTS+pos_x+1>=0&&pos_y*COLUMN_COUNTS+pos_x+1<ROW_COUNTS*COLUMN_COUNTS?pos_y*COLUMN_COUNTS+pos_x+1:-1;//right
+    neighbor_pos_id[2] = pos_id-1>=0&&pos_id-1<ROW_COUNTS*COLUMN_COUNTS?pos_id-1&&pos_x>0:-1;//left
+    neighbor_pos_id[3] = pos_id+1>=0&&pos_id+1<ROW_COUNTS*COLUMN_COUNTS&&pos_x<COLUMN_COUNTS-1?pos_id+1:-1;//right
     for(int i=0;i<4;i++){
         if(neighbor_pos_id[i]!=-1&&!is_pos_visited(neighbor_pos_id[i])){
             return true;
@@ -446,25 +446,25 @@ int main()
 {
     srand((unsigned)time(NULL));   /* 用当前时间初始化随机种子 */
 
-    for (int k=0;k<ROW_COUNTS*COLUMN_COUNTS;k++)
-    {
-        for (int t=0; t<ROW_COUNTS*COLUMN_COUNTS;t++)
-        {
-            int i = (int)(t/COLUMN_COUNTS);
-            int j = t%COLUMN_COUNTS;
-            if(k==((i-1)*COLUMN_COUNTS+j)||(k==((i+1)*COLUMN_COUNTS+j))||((k==((i)*COLUMN_COUNTS+j-1))&&j!=0)||(k==((i)*COLUMN_COUNTS+j+1)&&j!=(COLUMN_COUNTS-1)))
-            {
-                g_isAdjoinList[t][k]=1;
-                g_isAdjoinList[k][t]=1;
-            }else{
-                g_isAdjoinList[t][k]=0;
-            }
+    // for (int k=0;k<ROW_COUNTS*COLUMN_COUNTS;k++)
+    // {
+    //     for (int t=0; t<ROW_COUNTS*COLUMN_COUNTS;t++)
+    //     {
+    //         int i = (int)(t/COLUMN_COUNTS);
+    //         int j = t%COLUMN_COUNTS;
+    //         if(k==((i-1)*COLUMN_COUNTS+j)||(k==((i+1)*COLUMN_COUNTS+j))||((k==((i)*COLUMN_COUNTS+j-1))&&j!=0)||(k==((i)*COLUMN_COUNTS+j+1)&&j!=(COLUMN_COUNTS-1)))
+    //         {
+    //             g_isAdjoinList[t][k]=1;
+    //             g_isAdjoinList[k][t]=1;
+    //         }else{
+    //             g_isAdjoinList[t][k]=0;
+    //         }
                 
             
             
-        }
+    //     }
         
-    }
+    // }
 
     // printf("%d ", g_isAdjoinList[2][3]);
     // printf("%d ", g_isAdjoinList[3][4]);
@@ -472,7 +472,7 @@ int main()
     build_forest();
     
 
-    initgraph(1000,1000);
+    initgraph(1320,1320);
     
     setbkcolor(RGB(228, 228, 236));
     cleardevice();
